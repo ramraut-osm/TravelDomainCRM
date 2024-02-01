@@ -2,6 +2,9 @@ var Sdk = window.Sdk || {};
 
 (function () {
     this.onSaveBooking = function (executionContext) {
+
+
+        //test comment
         var formContext = executionContext.getFormContext();
 
         var adultsChosen = formContext.getAttribute("tr_noofadults");
