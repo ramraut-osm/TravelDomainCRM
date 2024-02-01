@@ -41,7 +41,7 @@ namespace MyPlugin
                     {
 
                         string trNameValue = string.Empty;
-                        DateTime startDate = DateTime.UtcNow;
+                        DateTime startDate = DateTime.MinValue;
 
                         if (entity.Attributes.Contains("tr_startdate"))
                         {
@@ -58,7 +58,7 @@ namespace MyPlugin
                                 string placeLogicalName = placeData.LogicalName;
                                 Guid placeLookupId = placeData.Id;
 
-                                trNameValue = $"{placeLookupName} - {startDate.ToString("d/M/yyyy")}";
+                                trNameValue = $"{placeLookupName} - {startDate.ToString("M/d/yyyy")}";
 
                                 entity.Attributes.Add("tr_name", trNameValue);
                         }
