@@ -4,6 +4,23 @@ var Sdk = window.Sdk || {};
     this.onSaveBooking = function (executionContext) {
         var formContext = executionContext.getFormContext();
 
+         
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         var adultsChosen = formContext.getAttribute("tr_noofadults");
         var childrenChosen = formContext.getAttribute("tr_noofchildren");
         var daysChosen = formContext.getAttribute("tr_noofdays");
