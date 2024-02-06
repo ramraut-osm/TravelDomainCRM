@@ -4,7 +4,7 @@ var Sdk = window.Sdk || {};
     this.onInvoiceDiscount = function (executionContext) {
         var formContext = executionContext.getFormContext();
 
-        var discountField = Xrm.Page.getAttribute("tr_discountplan");
+        var discountField = formContext.getAttribute("tr_discountplan");
 
         if (discountField && discountField.getValue()!== null && discountField.getValue()[0] && discountField.getValue()[0].id) {
             var discountId = discountField.getValue()[0].id;
@@ -15,14 +15,14 @@ var Sdk = window.Sdk || {};
                     var discountAmount = result.tr_discountamount;
                     console.log('discountAmount :' + discountAmount)
 
-                    Xrm.Page.getAttribute("tr_discountapplied").setValue(discountAmount);
+                    formContext.getAttribute("tr_discountapplied").setValue(discountAmount);
 
-                    var bookingCost = Xrm.Page.getAttribute("tr_bookingcost").getValue();
-                    var vatRate = Xrm.Page.getAttribute("tr_vatratenew").getValue();
+                    var bookingCost = formContext.getAttribute("tr_bookingcost").getValue();
+                    var vatRate = formContext.getAttribute("tr_vatratenew").getValue();
 
                     if (bookingCost !== null && vatRate !== null) {
                         var totalCost = bookingCost - discountAmount + (bookingCost * (vatRate / 100));
-                        Xrm.Page.getAttribute("tr_total").setValue(totalCost);
+                        formContext.getAttribute("tr_total").setValue(totalCost);
                     }
                 },
                 function error(error) {
@@ -31,14 +31,14 @@ var Sdk = window.Sdk || {};
             );
         } else {
             console.log("Discount field is not selected.");
-            Xrm.Page.getAttribute("tr_discountapplied").setValue(null);
+            formContext.getAttribute("tr_discountapplied").setValue(null);
 
-            var bookingCost = Xrm.Page.getAttribute("tr_bookingcost").getValue() || 0;
-            var vatRate = Xrm.Page.getAttribute("tr_vatratenew").getValue() || 0;
+            var bookingCost = formContext.getAttribute("tr_bookingcost").getValue() || 0;
+            var vatRate = formContext.getAttribute("tr_vatratenew").getValue() || 0;
 
             if (bookingCost !== null && vatRate !== null) {
                 var totalCost = bookingCost + (bookingCost * (vatRate / 100));
-                Xrm.Page.getAttribute("tr_total").setValue(totalCost);
+                formContext.getAttribute("tr_total").setValue(totalCost);
             }
         }
     };

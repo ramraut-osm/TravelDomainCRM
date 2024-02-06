@@ -4,7 +4,7 @@ var Sdk = window.Sdk || {};
     this.onInvoiceBooking = function (executionContext) {
         var formContext = executionContext.getFormContext();
 
-        var bookingField = Xrm.Page.getAttribute("tr_bookingplan"); 
+        var bookingField = formContext.getAttribute("tr_bookingplan"); 
         if (bookingField && bookingField.getValue() && bookingField.getValue()[0] && bookingField.getValue()[0].id) {
             var bookingId = bookingField.getValue()[0].id;
             console.log('booking id :' + bookingId)
@@ -14,14 +14,15 @@ var Sdk = window.Sdk || {};
                    
                     var bookingCost = result.tr_cost;
                     console.log('bookingCost is:' + bookingCost);
-                    Xrm.Page.getAttribute("tr_bookingcost").setValue(bookingCost);
+                    formContext.getAttribute("tr_bookingcost").setValue(bookingCost);
 
                     var primaryContactId = result["_tr_primarycontact_value"];
                     console.log('primaryContactId is:' + primaryContactId);
 
 
                     if (primaryContactId) {
-                        Xrm.Page.getAttribute("tr_primarycontact").setValue([{ id: primaryContactId, entityType: "contact" }]);
+
+                        formContext.getAttribute("tr_primarycontact").setValue([{ id: primaryContactId, entityType: "contact" }]);
                     }
 
                     //if (primaryContactId) {
@@ -30,7 +31,7 @@ var Sdk = window.Sdk || {};
                     //        entityType: "contact"
                     //    }];
 
-                    //    Xrm.Page.getAttribute("tr_primarycontact").setValue(primaryContactEntityReference);
+                    //    formContext.getAttribute("tr_primarycontact").setValue(primaryContactEntityReference);
                     //}
                 },
                 function error(error) {
