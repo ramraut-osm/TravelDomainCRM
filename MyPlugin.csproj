@@ -94,7 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="bookingDuplicateCheck.cs" />
-    <Compile Include="HelloWorld.cs" />
     <Compile Include="InvoiceAutopopulate.cs" />
     <Compile Include="PlaceAutopopulate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

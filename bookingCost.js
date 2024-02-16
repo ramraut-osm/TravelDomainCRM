@@ -14,7 +14,7 @@ var Sdk = window.Sdk || {};
 
             var packageId = packageLookup.getValue()[0].id;
 
-            Xrm.WebApi.retrieveRecord("tr_package", packageId, "?$select=tr_packagecostpercouple,tr_packagecostperchild,tr_packagecostperday").then(
+            Xrm.WebApi.retrieveRecord("tr_package", packageId, "?$select=tr_packagecostpercouple,tr_packagecostperchild,tr_packagecostperday, tr_startdate").then(
                 function success(result) {
 
                     console.log("adultsChosen is :" + adultsChosen);
@@ -40,6 +40,10 @@ var Sdk = window.Sdk || {};
                     console.log("totalCost is :" + totalCost)
 
                     formContext.getAttribute("tr_cost").setValue(totalCost);
+
+                    var startDate = result.tr_startdate;                    
+                    formContext.getAttribute("tr_bookingstartdate").setValue(new Date(startDate));
+                   
                 },  
             function error(error) {
                     console.error("Error occurred while retrieving package details: " + error.message);
